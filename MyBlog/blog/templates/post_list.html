@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Виведення постів</title>
+</head>
+<body>
+    <h1>Пости</h1>
+
+    {% if posts %}
+        <ul>
+        {% for post in posts %}
+            <il>
+                <strong>{{ post. title }}</strong><br>
+                {{ post.published_date }}<br>
+                {{ post.content|linebreaks }}
+            </il>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Постів ще немає.</p>
+    {% endif %}
+</body>
+</html>
