@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Пост</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+    <div class="post-card" style="max-width: 800px; margin: 40px auto;">
+        <h1 class="post-title">{{ post.title }}</h1>
+
+        <p class="post-date">
+            Опубліковано: {{ post.published_date|date:"d.m.Y H:i" }}
+        </p>
+
+        <p class="post-author">
+            Автор: <a href="{% url 'author' post.author.pk %}">
+                {{ post.author.name }}
+            </a>
+        </p>
+
+        <div class="post-content" style="margin-top: 20px;">
+            {{ post.content|linebreaks }}
+        </div>
+
+        <div style="margin-top: 30px;">
+            <a href="{% url 'post_list' %}" class="post-author">До списку</a>
+        </div>
+    </div>
+
+</body>
+</html>
