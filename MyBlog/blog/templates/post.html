@@ -24,8 +24,26 @@
             {{ post.content|linebreaks }}
         </div>
 
-        <div style="margin-top: 30px;">
-            <a href="{% url 'post_list' %}" class="post-author">До списку</a>
+        <hr style="margin: 40px 0;">
+
+        <div class="comments-section">
+            <h2>Коментарі</h2>
+
+            {% if comments %}
+                {% for comment in comments %}
+                    <div class="comment-card">
+                        <p class="comment-author">{{ comment.author.name }}</p>
+                        <p class="comment-date">{{ comment.created_date|date:"d.m.Y H:i" }}</p>
+                        <div class="comment-text">{{ comment.text|linebreaks }}</div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="no-comments">Наразі коментарів немає.</p>
+            {% endif %}
+        </div>
+
+        <div style="margin-top: 30px; text-align: center;">
+            <a href="{% url 'post_list' %}" class="post-author">← До списку</a>
         </div>
     </div>
 

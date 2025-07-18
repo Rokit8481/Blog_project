@@ -20,3 +20,12 @@ class Post(models.Model):
     
     def published_recently(self):
         return self.published_date >= timezone.now() - timedelta(days=7)
+    
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete = models.CASCADE, related_name = "comments")
+    author = models.ForeignKey(Author, on_delete = models.CASCADE)
+    text = models.TextField()
+    created_date = models.DateTimeField(auto_now_add = True)
+
+    def __str__(self):
+        return f"Коментар до «{self.post.title}» від {self.author.name}"

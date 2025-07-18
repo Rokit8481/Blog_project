@@ -19,12 +19,32 @@
                 <h2 class="post-title">
                     <a href="{% url 'post' post.pk %}">{{ post.title }}</a>
                 </h2>
-                <p class="post-date">{{ post.published_date }}</p>
+                <p class="post-date">{{ post.published_date|date:"d.m.Y H:i" }}</p>
                 <p class="post-content">{{ post.content|truncatewords:30 }}</p>
             </div>
         {% empty %}
             <p style="text-align: center;">Цей автор поки не має постів.</p>
         {% endfor %}
+    </div>
+
+    <hr style="margin: 60px 0 40px;">
+
+    <h2 class="author-posts-title">Коментарі автора</h2>
+
+    <div class="comments-section" style="max-width: 800px; margin: 0 auto;">
+        {% if comments %}
+            {% for comment in comments %}
+                <div class="comment-card">
+                    <p class="comment-date">{{ comment.created_date|date:"d.m.Y H:i" }}</p>
+                    <p class="comment-post">
+                        До поста: <a href="{% url 'post' comment.post.pk %}">{{ comment.post.title }}</a>
+                    </p>
+                    <div class="comment-text">{{ comment.text|linebreaks }}</div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-comments">Цей автор поки не залишав коментарів.</p>
+        {% endif %}
     </div>
 
 </body>

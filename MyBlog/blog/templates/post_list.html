@@ -30,6 +30,12 @@
                 <div class="post-content">
                     {{ post.content|truncatewords:30 }}
                 </div>
+
+                <div class="post-comments-link" style="margin-top: 10px;">
+                    <a href="{% url 'post' post.pk %}">
+                        {{ post.comments.count }} коментар(-ів){{ post.comments.count|pluralize:",і,ів" }}
+                    </a>
+                </div>
             </div>
         {% empty %}
             <p style="text-align: center;">Наразі немає постів.</p>
